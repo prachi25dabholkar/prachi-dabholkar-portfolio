@@ -1,5 +1,6 @@
 import { MotionConfig } from 'motion/react'
 import Nav from './components/Nav'
+import Doodles from './components/Doodles'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
 import Impact from './components/Impact'
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <a href="#about" className="sr-only z-[70] rounded bg-ink px-4 py-2 text-paper focus:not-sr-only focus:fixed focus:top-3 focus:left-3">Skip to content</a>
+      <Doodles />
       <Nav />
       <main>
         <Hero />

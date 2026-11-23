@@ -35,8 +35,13 @@ body { background: var(--color-paper); color: var(--color-ink); font-family: var
 .marquee { animation: marquee 40s linear infinite; }
 .marquee-wrap:hover .marquee { animation-play-state: paused; }
 .scroll-cue { animation: scroll-cue 1.8s cubic-bezier(0.77, 0, 0.175, 1) infinite; }
+/* Background doodles: slow star-like drift; sparkles twinkle instead. */
+@keyframes drift { 33% { translate: 14px -18px; rotate: 8deg; } 66% { translate: -10px -6px; rotate: -6deg; } }
+@keyframes twinkle { 0%, 100% { scale: 1; filter: none; } 50% { scale: 0.55; filter: opacity(0.3); } }
+.doodle { animation: drift 20s ease-in-out infinite; }
+.doodle.twinkle { animation-name: twinkle; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .float, .aurora, .marquee, .scroll-cue { animation: none; }
+  .float, .aurora, .marquee, .scroll-cue, .doodle { animation: none; }
 }
