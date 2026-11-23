@@ -46,7 +46,42 @@ body { background: var(--color-paper); color: var(--color-ink); font-family: var
 .doodle { animation: drift 20s ease-in-out infinite; }
 .doodle.twinkle { animation-name: twinkle; }
 
+/* Impact dot grid. Entrance uses the `scale` property; the hover ripple writes `transform`,
+   so the two never fight. Colour changes ripple out via a per-dot --w delay. */
+.dot {
+  position: relative; aspect-ratio: 1; border-radius: 9999px; background: var(--color-paper); opacity: .85; cursor: default;
+  transition-property: background-color, opacity, transform;
+  transition-duration: .35s, .35s, .25s;
+  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  transition-delay: var(--w, 0ms), var(--w, 0ms), 0ms;
+}
+@keyframes dot-in { from { opacity: .08; scale: .5; } }
+.dots:not(.in) .dot { opacity: .08; scale: .5; }
+.dots.in .dot { animation: dot-in .35s cubic-bezier(0.23, 1, 0.32, 1) backwards; animation-delay: var(--d); }
+.dots.has-story .dot { opacity: .2; }
+/* Same order/colours as SERIES in StoryChart.jsx */
+.dots .dot[data-lit="a"] { background: #e8cc8f; opacity: 1; }
+.dots .dot[data-lit="b"] { background: #6c9ad6; opacity: 1; }
+.dots .dot[data-lit="c"] { background: #d696b4; opacity: 1; }
+.dots .dot[data-lit="d"] { background: #a9b8cc; opacity: 1; }
+/* Story dots are a different SHAPE (hollow "target": navy fill, white ring, small centre), so they stay
+   distinct whatever colour the surrounding dots are lit. The active one fills its centre and glows. */
+.dots .dot[data-story] {
+  cursor: pointer; opacity: 1;
+  background: radial-gradient(circle, var(--color-paper) 0 26%, var(--color-teal) 30%);
+  box-shadow: inset 0 0 0 2px var(--color-paper);
+}
+.dots .dot[data-active] {
+  background: radial-gradient(circle, var(--color-teal) 0 30%, var(--color-paper) 34%);
+  box-shadow: 0 0 0 3px rgb(247 249 252 / .35), 0 0 12px 2px rgb(247 249 252 / .45);
+}
+@keyframes story-ring { 0%, 100% { opacity: .15; scale: .85; } 50% { opacity: .7; scale: 1.3; } }
+.dot[data-story]::after { content: ""; position: absolute; inset: -5px; border-radius: inherit; border: 1px solid var(--color-paper); animation: story-ring 2.6s ease-in-out infinite; }
+@keyframes pager-fill { from { transform: scaleX(0); } }
+.pager-fill { animation: pager-fill 6s linear; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .float, .aurora, .marquee, .scroll-cue, .doodle { animation: none; }
+  .float, .aurora, .marquee, .scroll-cue, .doodle, .dots.in .dot, .dot[data-story]::after { animation: none; }
+  .dot { transition-delay: 0ms; }
 }

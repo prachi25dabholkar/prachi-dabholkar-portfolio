@@ -24,6 +24,49 @@ export const stats = [
   { value: 12, suffix: '+', label: 'Presentations & awards', note: 'National & international' },
 ]
 
+// Story dots in the Impact grid (17 rows × 20 cols, 340 dots). `at` = [row, col]. Array order = autoplay order.
+// parts: dot counts lit outward from the story dot, coloured in palette order (sand, dusty blue, muted rose, grey-blue);
+//        chart series use the same order, so dots and chart share colours. light: 'row' | 'quad' override parts.
+// WHO figures verified against the WHO "Burns" fact sheet (21 Oct 2026, 2023 GHE data).
+const WHO = 'WHO, Burns fact sheet (2023 estimates)'
+const STUDY = 'ICMR multi-centric burns study'
+export const dotStories = [
+  { at: [5, 1], parts: [340], title: 'Millions, uncounted', source: 'MoHFW, DGHS: National Burn Programme',
+    text: 'India sees an estimated 6–7 million burn injuries a year, and there is no national burn registry. If this grid were one year of them, each dot would be about 20,000 people.',
+    chart: { kind: 'stat', value: '6–7M', label: 'burn injuries a year in India (estimate)' } },
+  { at: [3, 15], parts: [117, 109, 114], title: 'Two thirds of the burden', source: WHO,
+    text: 'In 2023 about 163,000 people died worldwide from fire, heat and hot substances. About two thirds were in the WHO South-East Asia and African Regions.',
+    chart: { kind: 'bars', items: [['South-East Asia', 56300], ['Africa', 52100], ['Rest of world', 54600]] } },
+  { at: [7, 9], parts: [238, 102], title: 'Women carry the risk', source: WHO,
+    text: 'In the WHO South-East Asia Region, which includes India, women accounted for about 70% of burn deaths. Open cooking fires and unstable stoves are key household risks.',
+    chart: { kind: 'donut', items: [['Women', 70], ['Men', 30]] } },
+  { at: [8, 14], parts: [176, 164], title: 'A global gap', source: WHO,
+    text: 'Worldwide the gap is smaller but still there: about 84,600 women and 78,800 men died from burns in 2023.',
+    chart: { kind: 'bars', items: [['Women', 84600], ['Men', 78800]] } },
+  { at: [10, 17], parts: [74, 266], title: 'Children at risk', source: WHO,
+    text: 'About 35,600 of those deaths were children under 15. Hot liquids, cooking equipment and open flames put children at particular risk of scalds.',
+    chart: { kind: 'donut', items: [['Under 15', 22], ['15 and older', 78]] } },
+  { at: [1, 4], parts: [100, 240], title: 'Where we went', source: STUDY,
+    text: 'The study ran across 17 field sites, 5 urban and 12 rural, and the dots split in that ratio. (Split by sites; households per site varied.)',
+    chart: { kind: 'bars', items: [['Urban sites', 5], ['Rural sites', 12]] } },
+  { at: [2, 9], light: 'quad', title: 'Four lenses on every home', source: STUDY,
+    text: 'Each household was studied through four lenses: how common burns were, first-aid knowledge and practice, quality of life, and out-of-pocket cost. Each colour is one lens.',
+    chart: { kind: 'chips', items: ['Prevalence', 'First-aid KAP', 'Quality of life', 'Out-of-pocket cost'] } },
+  { at: [16, 6], parts: [26], title: 'Into the classroom', source: STUDY,
+    text: 'Alongside households, the study surveyed 260 adolescents across 5 high schools. At the same 10-per-dot scale, that is these 26 dots.',
+    chart: { kind: 'stat', value: '260', label: 'adolescents across 5 high schools' } },
+  { at: [11, 11], parts: [145, 148, 47], title: 'Who pays for care', source: 'National Health Accounts, India 2023-24',
+    text: 'The study measured what burns cost families. Nationally, households pay about 42.7% of health spending out of pocket, close to the government’s 43.5%, down from 64.2% in 2013-14.',
+    // Years where an NHA estimate was found; x is the fiscal-year start, so the missing 2020-21 stays a visible gap.
+    chart: { kind: 'line', suffix: '%', label: 'Out-of-pocket share of health spending', points: [[2013, 64.2], [2018, 48.2], [2019, 47.1], [2021, 39.4], [2022, 43.4], [2023, 42.7]] } },
+  { at: [13, 3], light: 'row', title: '20 minutes that matter', source: WHO,
+    text: 'One row of 20 dots: about 20 minutes of cool running water is the advised first aid for smaller burns. Correcting first-aid myths was part of the study’s campaigns.',
+    chart: { kind: 'timer', minutes: 20, avoid: ['Ice', 'Oil', 'Butter', 'Toothpaste'] } },
+  { at: [15, 12], parts: [0, 340], title: 'Back to the community', source: STUDY,
+    text: 'The findings didn’t stay in a report. They fed prevention and first-aid campaigns in the same communities that were surveyed.',
+    chart: { kind: 'flow', steps: ['Survey', 'Findings', 'Campaigns'] } },
+]
+
 export const experience = [
   {
     role: 'Research Associate',
