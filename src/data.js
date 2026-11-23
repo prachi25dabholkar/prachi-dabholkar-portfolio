@@ -8,6 +8,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/dr-prachi-dabholkar-207a931b4',
   location: 'Ontario, Canada',
   portrait: img('conf-lhrd'),
+  cv: '/Prachi-Dabholkar-CV.pdf', // file lives in public/
   tagline:
     'I bridge what happens in the clinic with what unfolds across populations, turning field evidence, lived experience and spatial data into equity-focused health solutions.',
   about: [

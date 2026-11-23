@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'motion/react'
-import { ArrowDown, MapPin, Award } from 'lucide-react'
+import { ArrowDown, MapPin, Award, Download } from 'lucide-react'
 import { profile } from '../data'
 import { MaskText, Magnetic, EASE_OUT } from './ui'
 
@@ -47,6 +47,9 @@ export default function Hero() {
             <Magnetic>
               <a href="#contact" className="inline-block rounded-full border border-ink/15 bg-paper/60 px-6 py-3.5 font-medium backdrop-blur transition-colors hover:border-teal hover:text-teal">Get in touch</a>
             </Magnetic>
+            <a href={profile.cv} download className="group inline-flex items-center gap-1.5 px-2 py-3.5 font-medium text-teal underline-offset-4 hover:underline">
+              <Download size={17} className="transition-transform duration-200 group-hover:translate-y-0.5" /> Download CV
+            </a>
             <span className="ml-1 inline-flex items-center gap-1.5 text-sm text-muted"><MapPin size={16} /> {profile.location}</span>
           </motion.div>
         </motion.div>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Mail, Linkedin, Phone, Copy, Check, ArrowUpRight } from 'lucide-react'
+import { Mail, Linkedin, Phone, Copy, Check, ArrowUpRight, Download } from 'lucide-react'
 import { profile } from '../data'
 import { Reveal, MaskText } from './ui'
 
@@ -34,6 +34,11 @@ export default function Contact() {
           </a>
           <a href={`tel:${profile.phone.replace(/[^+\d]/g, '')}`} className="flex items-center gap-3 rounded-2xl border border-paper/20 p-5 font-medium transition hover:bg-paper/10">
             <Phone className="text-sun" /> {profile.phone}
+          </a>
+        </Reveal>
+        <Reveal delay={0.25} className="mt-6">
+          <a href={profile.cv} download className="group inline-flex items-center gap-2 rounded-full bg-sun px-6 py-3.5 font-semibold text-ink transition-colors hover:bg-paper">
+            <Download size={18} className="transition-transform duration-200 group-hover:translate-y-0.5" /> Download CV <span className="font-normal text-ink/60">PDF</span>
           </a>
         </Reveal>
         <span className="sr-only" aria-live="polite">{copied ? 'Email copied' : ''}</span>
