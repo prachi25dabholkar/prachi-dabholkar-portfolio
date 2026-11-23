@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  /* Clinical Blue theme. Token names are role slots: teal = primary, coral = accent, sun = highlight. */
+  --color-paper: #f7f9fc;
+  --color-paper-2: #e6edf6;
+  --color-ink: #0d1b2a;
+  --color-muted: #51607a;
+  --color-teal: #0b3b66;
+  --color-teal-2: #1e6fb8;
+  --color-sage: #2bb39a;
+  --color-coral: #0f8a72;
+  --color-sun: #f2b544;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--color-sun); color: var(--color-ink); }
+.grain { background-image: radial-gradient(rgb(11 59 102 / .08) 1px, transparent 1px); background-size: 18px 18px; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+/* Looping decorative motion uses the `translate` property, not `transform`,
+   so it never collides with Motion's per-frame transform updates on the same element. */
+@keyframes float { 50% { translate: 0 -8px; } }
+@keyframes aurora { 33% { translate: 6% 8% ; } 66% { translate: -5% 4%; } }
+@keyframes marquee { to { translate: -50% 0; } }
+@keyframes scroll-cue { from { translate: 0 -100%; } to { translate: 0 200%; } }
+.float { animation: float 5s ease-in-out infinite; }
+.float-2 { animation-duration: 6.5s; animation-delay: -2s; }
+.aurora { animation: aurora 18s ease-in-out infinite; }
+.aurora-2 { animation-duration: 22s; animation-direction: reverse; }
+.aurora-3 { animation-duration: 26s; animation-delay: -8s; }
+.marquee { animation: marquee 40s linear infinite; }
+.marquee-wrap:hover .marquee { animation-play-state: paused; }
+.scroll-cue { animation: scroll-cue 1.8s cubic-bezier(0.77, 0, 0.175, 1) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .float, .aurora, .marquee, .scroll-cue { animation: none; }
+}
