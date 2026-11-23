@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
+/* Local fallbacks resized to match the web fonts' metrics (measured in-browser),
+   so the swap when Google Fonts arrive doesn't shift the layout (CLS). */
+@font-face { font-family: "Fraunces Fallback"; src: local("Georgia"); size-adjust: 85.58%; ascent-override: 114.5%; descent-override: 30.4%; line-gap-override: 0%; }
+@font-face { font-family: "DM Sans Fallback"; src: local("Arial"); size-adjust: 93.2%; ascent-override: 106.2%; descent-override: 33.3%; line-gap-override: 0%; }
+
 @theme {
-  --font-serif: "Fraunces", Georgia, serif;
-  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-serif: "Fraunces", "Fraunces Fallback", Georgia, serif;
+  --font-sans: "DM Sans", "DM Sans Fallback", system-ui, sans-serif;
   /* Clinical Blue theme. Token names are role slots: teal = primary, coral = accent, sun = highlight. */
   --color-paper: #f7f9fc;
   --color-paper-2: #e6edf6;
@@ -11,7 +16,7 @@
   --color-teal: #0b3b66;
   --color-teal-2: #1e6fb8;
   --color-sage: #2bb39a;
-  --color-coral: #0f8a72;
+  --color-coral: #0b7562; /* ≥4.5:1 on paper and paper-2 for small labels */
   --color-sun: #f2b544;
 }
 

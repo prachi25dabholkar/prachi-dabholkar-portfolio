@@ -32,7 +32,7 @@ export default function Recognition() {
                   <div className="grid aspect-[4/3] place-items-center bg-linear-to-br from-teal-2 to-sage"><Award size={64} strokeWidth={1.2} className="text-paper" /></div>
                 )}
                 <div className="flex flex-1 flex-col p-5">
-                  <p className="font-serif text-3xl text-teal/30">{t.year}</p>
+                  <p className="font-serif text-3xl text-teal-2">{t.year}</p>
                   <h4 className="mt-1 font-serif text-lg leading-snug">{t.title}</h4>
                   <p className="mt-2 flex-1 text-sm text-muted">{t.topic}</p>
                   {t.award && <p className="mt-4 inline-flex items-center gap-1.5 self-start rounded-full bg-sun/25 px-3 py-1 text-xs font-semibold text-ink"><Award size={14} /> {t.award}</p>}
@@ -48,8 +48,8 @@ export default function Recognition() {
         {publications.map((p, i) => {
           const Tag = p.href ? 'a' : 'div'
           return (
-            <Reveal key={p.title} delay={i * 0.05}>
-              <li>
+            <li key={p.title}>
+              <Reveal delay={i * 0.05}>
                 <Tag {...(p.href && { href: p.href, target: '_blank', rel: 'noreferrer' })} className="group grid gap-2 py-6 sm:grid-cols-[9rem_1fr_auto] sm:gap-8">
                   <span className={`self-start rounded-full px-3 py-1 text-xs font-semibold sm:justify-self-start ${p.type === 'Published' ? 'bg-teal text-paper' : 'bg-paper-2 text-muted'}`}>{p.type}</span>
                   <span>
@@ -58,8 +58,8 @@ export default function Recognition() {
                   </span>
                   {p.href && <ArrowUpRight className="hidden text-muted transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-teal sm:block" />}
                 </Tag>
-              </li>
-            </Reveal>
+              </Reveal>
+            </li>
           )
         })}
       </ul>

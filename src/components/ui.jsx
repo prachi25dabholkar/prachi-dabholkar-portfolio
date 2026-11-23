@@ -33,7 +33,8 @@ export function MaskText({ children, delay = 0, stagger = 0.045, animateOnMount 
   if (typeof children !== 'string') return <motion.span className="block" initial="hide" {...trigger}>{word(children, 0)}</motion.span>
   const words = children.split(' ')
   return (
-    <motion.span initial="hide" {...trigger} aria-label={children}>
+    <motion.span initial="hide" {...trigger}>
+      <span className="sr-only">{children}</span>
       {words.map((w, i) => <span key={i} aria-hidden>{word(w, i)}{i < words.length - 1 ? ' ' : ''}</span>)}
     </motion.span>
   )

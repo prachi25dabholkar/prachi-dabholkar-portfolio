@@ -1,4 +1,5 @@
 import { MotionConfig } from 'motion/react'
+import { Analytics } from '@vercel/analytics/react'
 import Nav from './components/Nav'
 import Doodles from './components/Doodles'
 import Hero from './components/Hero'
@@ -30,6 +31,7 @@ export default function App() {
         <Gallery />
       </main>
       <Contact />
+      <Analytics />
     </MotionConfig>
   )
 }

@@ -36,16 +36,16 @@ export default function About() {
           <h3 className="mb-6 flex items-center gap-2 font-serif text-2xl"><GraduationCap className="text-coral" /> Education</h3>
           <ol className="space-y-4">
             {education.map((e, i) => (
-              <Reveal key={e.degree} delay={i * 0.08}>
-                <li className="group flex items-center gap-5 rounded-2xl border border-ink/10 bg-paper p-4 transition hover:border-teal/40 hover:shadow-lg hover:shadow-teal/5">
+              <li key={e.degree}>
+                <Reveal delay={i * 0.08} className="group flex items-center gap-5 rounded-2xl border border-ink/10 bg-paper p-4 transition-[border-color,box-shadow] hover:border-teal/40 hover:shadow-lg hover:shadow-teal/5">
                   <img src={e.image} alt="" loading="lazy" className="size-20 shrink-0 rounded-xl object-cover sm:size-24" />
                   <div>
                     <p className="text-xs font-medium tracking-wide text-coral uppercase">{e.period}</p>
                     <p className="mt-1 font-serif text-xl">{e.degree}</p>
                     <p className="text-sm text-muted">{e.school}{e.note && <span className="ml-2 rounded-full bg-sage/25 px-2 py-0.5 text-xs text-teal">{e.note}</span>}</p>
                   </div>
-                </li>
-              </Reveal>
+                </Reveal>
+              </li>
             ))}
           </ol>
         </div>
