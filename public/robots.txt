@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prachi-dabholkar-portfolio.vercel.app/sitemap.xml
