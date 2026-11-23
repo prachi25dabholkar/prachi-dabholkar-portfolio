@@ -1,27 +1,30 @@
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react'
-import { HeartPulse, Stethoscope, Pill, Syringe, Microscope, Dna, Thermometer, Bandage, TestTube, Activity, Plus, Brain, Apple, HandHeart, Droplet, ShieldPlus, Hospital, Sparkle } from 'lucide-react'
+import {
+  Sparkles, Star, Cross, Droplets, Leaf, Sprout, Carrot, Apple, Eye, Ear, Bone, Footprints,
+  HeartPulse, Stethoscope, Pill, Syringe, Microscope, Dna, Thermometer, Bandage, TestTube, Brain,
+  HandHeart, SmilePlus, Baby, Ambulance, PillBottle, ScanHeart,
+} from 'lucide-react'
 
-// [Icon, left %, top % (of a 125vh layer), size px, drift duration s, colour, desktop-only]
+// Every icon appears once. [Icon, left %, top % (of a 125vh layer), size px, drift duration s, desktop-only]
 const far = [
-  [Plus, 6, 12, 14, 16, 'text-teal-2'], [Sparkle, 22, 30, 12, 9, 'text-sun', true], [Dna, 41, 8, 20, 24, 'text-sage', true],
-  [Plus, 63, 22, 12, 18, 'text-sun'], [Sparkle, 80, 10, 14, 11, 'text-teal-2'], [Droplet, 93, 38, 16, 20, 'text-teal-2', true],
-  [Sparkle, 12, 58, 10, 8, 'text-sun'], [Plus, 34, 74, 14, 17, 'text-sage', true], [Sparkle, 56, 52, 12, 10, 'text-teal-2'],
-  [Apple, 72, 82, 18, 22, 'text-sage', true], [Plus, 88, 66, 12, 15, 'text-sun'], [Sparkle, 48, 94, 10, 9, 'text-sun', true],
+  [Sparkles, 6, 12, 16, 9], [Star, 22, 30, 14, 11, true], [Cross, 41, 6, 14, 18, true], [Droplets, 63, 22, 16, 20],
+  [Leaf, 80, 10, 16, 17], [Sprout, 93, 38, 18, 22, true], [Carrot, 12, 58, 16, 19], [Apple, 34, 74, 18, 21, true],
+  [Eye, 56, 52, 16, 16], [Ear, 72, 84, 16, 23, true], [Bone, 88, 64, 18, 18], [Footprints, 48, 92, 18, 24, true],
 ]
 const near = [
-  [HeartPulse, 4, 28, 26, 20, 'text-teal-2'], [Stethoscope, 90, 18, 28, 26, 'text-teal'], [Pill, 18, 88, 22, 18, 'text-sage'],
-  [Microscope, 70, 45, 26, 28, 'text-teal', true], [Syringe, 30, 46, 22, 22, 'text-teal-2', true], [Thermometer, 94, 80, 22, 19, 'text-teal-2'],
-  [Bandage, 52, 16, 22, 21, 'text-sage', true], [TestTube, 8, 70, 22, 24, 'text-teal', true], [Activity, 60, 70, 26, 18, 'text-sage'],
-  [Brain, 82, 96, 24, 27, 'text-teal', true], [HandHeart, 38, 98, 24, 23, 'text-teal-2'], [ShieldPlus, 76, 4, 22, 25, 'text-sage', true],
-  [Hospital, 24, 10, 22, 26, 'text-teal', true],
+  [HeartPulse, 4, 28, 26, 20], [Stethoscope, 90, 18, 28, 26], [Pill, 18, 88, 22, 18], [Microscope, 70, 45, 26, 28, true],
+  [Syringe, 30, 44, 22, 22, true], [Thermometer, 94, 80, 22, 19], [Bandage, 52, 14, 22, 21, true], [TestTube, 8, 70, 22, 24, true],
+  [Brain, 82, 96, 24, 27, true], [HandHeart, 38, 98, 24, 23], [SmilePlus, 60, 70, 24, 18], [Baby, 76, 4, 22, 25, true],
+  [Ambulance, 24, 10, 24, 26, true], [PillBottle, 44, 60, 20, 20, true], [ScanHeart, 96, 52, 22, 24], [Dna, 16, 40, 22, 25, true],
 ]
+const TWINKLE = new Set([Sparkles, Star])
 
 function Layer({ items, opacity, offset, progress, still }) {
   const transform = useTransform(progress, (v) => `translateY(${still ? 0 : -v * offset}px)`)
   return (
     <motion.div className="absolute inset-x-0 top-0 h-[125vh]" style={{ transform }}>
-      {items.map(([Icon, left, top, size, dur, color, desktopOnly], i) => (
-        <span key={i} className={`doodle absolute ${color} ${desktopOnly ? 'hidden md:block' : ''} ${Icon === Sparkle ? 'twinkle' : ''}`}
+      {items.map(([Icon, left, top, size, dur, desktopOnly], i) => (
+        <span key={i} className={`doodle absolute ${desktopOnly ? 'hidden md:block' : ''} ${TWINKLE.has(Icon) ? 'twinkle' : ''}`}
           style={{ left: `${left}%`, top: `${top}%`, opacity, animationDuration: `${dur}s`, animationDelay: `-${(i * 3.7) % dur}s` }}>
           <Icon size={size} strokeWidth={1.5} />
         </span>
@@ -30,14 +33,16 @@ function Layer({ items, opacity, offset, progress, still }) {
   )
 }
 
-// Decorative healthcare "constellation" behind the page; two depth layers parallax at different speeds.
+// Decorative healthcare "constellation" floating over the page. mix-blend-difference inverts it per pixel:
+// the peach stroke reads navy over light sections and gold over the dark ones.
+// z-40: above page content, below the nav (z-50) and overlays (z-50/60).
 export default function Doodles() {
   const { scrollYProgress } = useScroll()
   const still = useReducedMotion()
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      <Layer items={far} opacity={0.45} offset={60} progress={scrollYProgress} still={still} />
-      <Layer items={near} opacity={0.24} offset={160} progress={scrollYProgress} still={still} />
+    <div aria-hidden className="pointer-events-none fixed inset-0 z-40 overflow-hidden text-[#ecc48c] mix-blend-difference">
+      <Layer items={far} opacity={0.65} offset={60} progress={scrollYProgress} still={still} />
+      <Layer items={near} opacity={0.42} offset={160} progress={scrollYProgress} still={still} />
     </div>
   )
 }
