@@ -19,10 +19,10 @@ export default function Contact() {
           <em className="text-sun"><MaskText delay={0.35}>together.</MaskText></em>
         </h2>
         <Reveal delay={0.3}><p className="mt-6 max-w-xl text-lg text-paper/70">Open to research, program evaluation, knowledge translation and community health roles across Canada.</p></Reveal>
-        <Reveal delay={0.15} className="mt-12 grid gap-4 md:grid-cols-3">
+        <Reveal delay={0.15} className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
           <div className="flex items-center justify-between gap-3 rounded-2xl bg-paper p-5 text-ink">
             <a href={`mailto:${profile.email}`} className="flex min-w-0 items-center gap-3">
-              <Mail className="shrink-0 text-coral" /><span className="truncate font-medium">{profile.email}</span>
+              <Mail className="shrink-0 text-coral" /><span className="font-medium break-all">{profile.email}</span>
             </a>
             <button onClick={copy} aria-label="Copy email address" className="shrink-0 rounded-full p-2 hover:bg-paper-2">
               {copied ? <Check size={18} className="text-teal" /> : <Copy size={18} />}

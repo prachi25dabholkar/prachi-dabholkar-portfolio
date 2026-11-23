@@ -102,7 +102,7 @@ export default function Impact() {
 
   return (
     <section className="bg-teal px-4 py-20 text-paper sm:px-8 md:py-24">
-      <div className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-2">
+      <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2">
         <div>
           <Reveal>
             <p className="mb-3 text-xs font-semibold tracking-[0.2em] text-sun uppercase">Impact at a glance</p>
@@ -148,10 +148,10 @@ export default function Impact() {
             ))}
           </div>
 
-          <div className="mt-2 min-h-56" aria-live="polite">
+          <div className="@container mt-2 min-h-56" aria-live="polite">
             <AnimatePresence mode="wait" initial={false}>
               {s && (
-                <motion.div key={story} className="grid gap-5 rounded-2xl bg-paper/[0.07] p-5 ring-1 ring-paper/10 sm:grid-cols-[1fr_15rem] sm:items-center"
+                <motion.div key={story} className="grid gap-5 rounded-2xl bg-paper/[0.07] p-5 ring-1 ring-paper/10 @lg:grid-cols-[1fr_15rem] @lg:items-center"
                   initial={{ opacity: 0, transform: 'translateY(8px)' }} animate={{ opacity: 1, transform: 'translateY(0px)' }} exit={{ opacity: 0, transition: { duration: 0.12 } }}
                   transition={{ duration: 0.35, ease: EASE_OUT }}>
                   <div>

@@ -21,7 +21,7 @@ function Line({ points, suffix = '', label }) {
   const d = points.map(([x, y], i) => `${i ? 'L' : 'M'}${sx(x).toFixed(1)},${sy(y).toFixed(1)}`).join(' ')
   const ends = [points[0], points.at(-1)]
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={`${label}: ${points.map(([x, y]) => `${x}, ${y}${suffix}`).join('; ')}`}>
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-72" role="img" aria-label={`${label}: ${points.map(([x, y]) => `${x}, ${y}${suffix}`).join('; ')}`}>
       <line x1={P.l} x2={W - P.r} y1={H - P.b} y2={H - P.b} className="stroke-paper/20" strokeWidth="1" />
       <motion.path d={d} fill="none" stroke={SERIES[0]} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"
         initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.1, ease: EASE_OUT }} />
