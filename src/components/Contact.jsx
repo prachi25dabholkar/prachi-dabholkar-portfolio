@@ -36,11 +36,13 @@ export default function Contact() {
             <Phone className="text-sun" /> {profile.phone}
           </a>
         </Reveal>
-        <Reveal delay={0.25} className="mt-6">
-          <a href={profile.cv} download className="group inline-flex items-center gap-2 rounded-full bg-sun px-6 py-3.5 font-semibold text-ink transition-colors hover:bg-paper">
-            <Download size={18} className="transition-transform duration-200 group-hover:translate-y-0.5" /> Download CV <span className="font-normal text-ink/60">PDF</span>
-          </a>
-        </Reveal>
+        {profile.cv && (
+          <Reveal delay={0.25} className="mt-6">
+            <a href={profile.cv} download className="group inline-flex items-center gap-2 rounded-full bg-sun px-6 py-3.5 font-semibold text-ink transition-colors hover:bg-paper">
+              <Download size={18} className="transition-transform duration-200 group-hover:translate-y-0.5" /> Download CV <span className="font-normal text-ink/60">PDF</span>
+            </a>
+          </Reveal>
+        )}
         <span className="sr-only" aria-live="polite">{copied ? 'Email copied' : ''}</span>
         <footer className="mt-24 flex flex-col justify-between gap-2 border-t border-paper/15 pt-6 text-sm text-paper/50 sm:flex-row">
           <span>&copy; {new Date().getFullYear()} {profile.name}</span>
